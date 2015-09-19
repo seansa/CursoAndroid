@@ -20,6 +20,18 @@
             android:name=".SegundaActivity"
             android:label="@string/title_activity_segunda" >
         </activity>
+        <activity
+            android:name=".SpinnerActivity"
+            android:label="@string/title_activity_spinner" >
+        </activity>
+        <activity
+            android:name=".ListViewActivity"
+            android:label="@string/title_activity_list_view" >
+        </activity>
+        <activity
+            android:name=".MasElementosActivity"
+            android:label="@string/title_activity_mas_elementos" >
+        </activity>
     </application>
 
 </manifest>
