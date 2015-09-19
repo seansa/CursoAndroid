@@ -19,10 +19,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Agregar"
         android:id="@+id/btnAgregarItemListView"
         android:layout_below="@+id/txtItemListView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="AgregarItem" />
 
     <ListView
         android:layout_width="wrap_content"
