@@ -53,5 +53,6 @@
         android:background="@drawable/orange_wallpaper"
         android:layout_below="@+id/txtContrasenia"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="36dp"
+        android:onClick="AceptarMain"/>
 </RelativeLayout>
