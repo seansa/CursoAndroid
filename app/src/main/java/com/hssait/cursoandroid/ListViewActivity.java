@@ -3,6 +3,7 @@ package com.hssait.cursoandroid;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ListViewActivity extends Activity {
+public class ListViewActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ListView lista;
     private Button btnAgrega;
@@ -30,6 +31,16 @@ public class ListViewActivity extends Activity {
         items     = new ArrayList<>();
 
         InicializarLista();
+        lista.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            String itemNombre = (String) lista.getItemAtPosition(position);
+
+            Toast.makeText(getApplicationContext(),
+                    "Posicion : " + position + " Item : " + itemNombre ,Toast.LENGTH_LONG).show();
     }
 
     private void InicializarLista() {
