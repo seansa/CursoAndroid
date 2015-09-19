@@ -30,21 +30,24 @@
             android:layout_height="wrap_content"
             android:text="Spinner"
             android:id="@+id/btnSpinner"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="LanzarSpinnerActivity"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ListView"
             android:id="@+id/btnListView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="LanzarListViewActivity"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mas Elementos"
             android:id="@+id/btnMasElementos"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="LanzarMasElementosActivity"/>
     </LinearLayout>
 
 </RelativeLayout>
