@@ -2,8 +2,10 @@ package com.hssait.cursoandroid;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,4 +51,10 @@ public class SpinnerActivity extends Activity {
         segundo.add("Valor 3");
     }
 
+    public void MostrarValoresSpinners(View view){
+        Toast.makeText(getApplicationContext(),
+                        "\nSpinner Opciones : " + String.valueOf(spinnerOpciones.getSelectedItem())+
+                        "\nSpinner Valores : " + String.valueOf(spinnerValores.getSelectedItem()),
+                Toast.LENGTH_LONG).show();
+    }
 }
