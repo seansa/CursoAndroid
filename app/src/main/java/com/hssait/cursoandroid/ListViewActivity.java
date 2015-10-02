@@ -1,15 +1,20 @@
 package com.hssait.cursoandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.hssait.cursoandroid.modelo.Item;
 
@@ -22,15 +27,16 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
     private EditText txtItem;
     private List<String> items;
     private ArrayAdapter<String> adapter;
+    public boolean eliminado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        txtItem   = (EditText)findViewById(R.id.txtItemListView);
-        lista     = (ListView)findViewById(R.id.listaItems);
-        items     = new ArrayList<>();
+        txtItem = (EditText) findViewById(R.id.txtItemListView);
+        lista = (ListView) findViewById(R.id.listaItems);
+        items = new ArrayList<>();
 
         InicializarLista();
         lista.setOnItemClickListener(this);
@@ -39,15 +45,41 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-            String itemNombre = (String) lista.getItemAtPosition(position);
+        String itemNombre = (String) lista.getItemAtPosition(position);
+        Alerta(itemNombre);
+    }
 
-            Toast.makeText(getApplicationContext(),
-                    "Posicion : " + position + " Item : " + itemNombre ,Toast.LENGTH_LONG).show();
+    public void Alerta(final String nombre){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListViewActivity.this);
+        builder.setMessage("¿Eliminar Item?")
+                .setTitle("Eliminar")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Usar esta forma, filtrando por el ID
+                        //new Delete().from(Item.class).where("nombre = ?", nombre).execute();
+                        Item i = new Select().from(Item.class)
+                                .where("nombre = ?", nombre).executeSingle();
+                        i.delete();
+                        items.remove(nombre);
+                        adapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.create();
+        builder.show();
+
     }
 
     private void InicializarLista() {
         List<Item> valores = new Select().from(Item.class).execute();
-        for(Item i: valores){
+        for (Item i : valores) {
             items.add(i.nombre);
         }
         adapter = new ArrayAdapter<>(this,
@@ -55,16 +87,16 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
         lista.setAdapter(adapter);
     }
 
-    public void AgregarItem(View view){
+    public void AgregarItem(View view) {
         String item = txtItem.getText().toString();
-        if (!item.isEmpty()){
+        if (!item.isEmpty()) {
             Item i = new Item();
             i.nombre = item;
             i.save();
             items.add(item);
             LimpiarTexto();
             adapter.notifyDataSetChanged();
-        }else{
+        } else {
             Toast.makeText(ListViewActivity.this, "Debe ingresar un item",
                     Toast.LENGTH_SHORT).show();
         }
