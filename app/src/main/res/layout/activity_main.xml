@@ -55,4 +55,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
         android:onClick="AceptarMain"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Registrarme"
+        android:id="@+id/button"
+        android:background="@drawable/orange_wallpaper"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="LanzarRegistroUsuario"/>
 </RelativeLayout>

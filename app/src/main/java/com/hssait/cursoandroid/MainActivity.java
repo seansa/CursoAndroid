@@ -59,4 +59,9 @@ public class MainActivity extends Activity {
         Intent i = new Intent(getApplicationContext(),SegundaActivity.class);
         startActivity(i);
     }
+
+    public void LanzarRegistroUsuario(View view){
+        Intent i = new Intent(getApplicationContext(),RegistroActivity.class);
+        startActivity(i);
+    }
 }
