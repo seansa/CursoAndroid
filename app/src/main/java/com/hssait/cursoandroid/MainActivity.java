@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.activeandroid.query.Select;
+import com.hssait.cursoandroid.modelo.Usuario;
+
 public class MainActivity extends Activity {
 
     //Declaracion
@@ -29,8 +32,8 @@ public class MainActivity extends Activity {
     public boolean ValidarCredenciales() {
         usuario = txtUser.getText().toString();
         contrasenia = txtPass.getText().toString();
-
-        return (usuario.compareTo("seba") == 0) && (contrasenia.compareTo("123") == 0);
+        return (new Select().from(Usuario.class)
+                .where("usuario = ? AND clave = ?", usuario, contrasenia).executeSingle()) != null;
     }
 
     //onClick btnAceptarMain
@@ -58,10 +61,12 @@ public class MainActivity extends Activity {
     private void LanzarSegundaActividad() {
         Intent i = new Intent(getApplicationContext(),SegundaActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void LanzarRegistroUsuario(View view){
         Intent i = new Intent(getApplicationContext(),RegistroActivity.class);
         startActivity(i);
+        LimpiarValores();
     }
 }
