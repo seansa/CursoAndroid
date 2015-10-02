@@ -2,10 +2,8 @@ package com.hssait.cursoandroid;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.hssait.cursoandroid.modelo.Item;
 
@@ -27,7 +24,6 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
     private EditText txtItem;
     private List<String> items;
     private ArrayAdapter<String> adapter;
-    public boolean eliminado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +45,10 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
         Alerta(itemNombre);
     }
 
-    public void Alerta(final String nombre){
+    public void Alerta(final String nombre) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ListViewActivity.this);
         builder.setMessage("¿Eliminar Item?")
-                .setTitle("Eliminar")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Usar esta forma, filtrando por el ID
@@ -66,9 +61,18 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
                         dialog.cancel();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setNeutralButton("Modificar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), EditItemActivity.class);
+                        i.putExtra("item", nombre);
+                        startActivity(i);
                         dialog.cancel();
                     }
                 });
@@ -104,5 +108,10 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
 
     private void LimpiarTexto() {
         txtItem.getText().clear();
+    }
+
+    public void Actualizar(View view){
+        items.clear();
+        InicializarLista();
     }
 }

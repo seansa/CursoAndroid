@@ -8,4 +8,5 @@
     <string name="title_activity_list_view">ListViewActivity</string>
     <string name="title_activity_mas_elementos">MasElementosActivity</string>
     <string name="title_activity_registro">RegistroActivity</string>
+    <string name="title_activity_edit_item">EditItemActivity</string>
 </resources>
