@@ -27,4 +27,9 @@ public class SegundaActivity extends Activity {
         startActivity(i);
     }
 
+    public void LanzarNoticiasActivity(View view){
+        Intent i = new Intent(getApplicationContext(), NoticiasActivity.class);
+        startActivity(i);
+    }
+
 }

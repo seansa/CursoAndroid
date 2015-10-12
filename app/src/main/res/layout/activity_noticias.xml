@@ -16,13 +16,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Buscar"
         android:id="@+id/btnNoticias"
         android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/litaNoticias"
+        android:id="@+id/listaNoticias"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

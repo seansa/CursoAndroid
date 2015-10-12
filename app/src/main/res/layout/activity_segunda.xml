@@ -23,7 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
 
         <Button
             android:layout_width="wrap_content"
@@ -48,6 +49,16 @@
             android:id="@+id/btnMasElementos"
             android:layout_gravity="center_horizontal"
             android:onClick="LanzarMasElementosActivity"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Noticias"
+            android:id="@+id/btnNoticasSegundaActividad"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:onClick="LanzarNoticiasActivity"/>
     </LinearLayout>
 
 </RelativeLayout>
