@@ -1,8 +1,10 @@
 package com.hssait.cursoandroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -27,8 +29,25 @@ public class NoticiasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticias);
         aQuery = new AQuery(this);
-        aQuery.id(R.id.btnNoticias).clicked(this, "TraerNoticias");
         noticias = new ArrayList<>();
+
+        aQuery.id(R.id.btnNoticias).clicked(this, "TraerNoticias");
+        aQuery.id(R.id.listaNoticias).itemClicked(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), SimpleNoticiaActivity.class);
+                for (Noticia n : noticias) {
+                    if (n.titulo.compareTo(aQuery.id(R.id.listaNoticias)
+                            .getListView().getItemAtPosition(position).toString())==0){
+                        i.putExtra("Titulo", n.titulo);
+                        i.putExtra("urlNoticia", n.urlNoticia);
+                        i.putExtra("url", n.imgUrl);
+                        break;
+                    }
+                }
+                startActivity(i);
+            }
+        });
     }
 
     public void TraerNoticias(View view) {
@@ -43,8 +62,16 @@ public class NoticiasActivity extends AppCompatActivity {
             JSONObject data = json.getJSONObject("responseData");
             JSONArray jsonArray = data.getJSONArray("results");
             for (int i = 0; i < jsonArray.length(); i++) {
+                System.out.println(i + "---_---");
                 JSONObject tmp = jsonArray.getJSONObject(i);
-                noticias.add(new Noticia(tmp.getString("titleNoFormatting"), tmp.getString("signedRedirectUrl")));
+                if (tmp.optJSONObject("image")!=null){
+                    JSONObject imageObj = tmp.getJSONObject("image");
+                    noticias.add(new Noticia(imageObj.optString("url"),
+                            tmp.getString("titleNoFormatting"), tmp.getString("signedRedirectUrl")));
+                }else{
+                    noticias.add(new Noticia("no image",
+                            tmp.getString("titleNoFormatting"), tmp.getString("signedRedirectUrl")));
+                }
             }
             CargarLista();
 
@@ -56,7 +83,7 @@ public class NoticiasActivity extends AppCompatActivity {
     }
 
     public void CargarLista() {
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ObtenerTitulos());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ObtenerTitulos());
         aQuery.id(R.id.listaNoticias).adapter(adapter);
     }
 

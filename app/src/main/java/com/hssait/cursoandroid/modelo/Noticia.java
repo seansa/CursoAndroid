@@ -6,12 +6,14 @@ package com.hssait.cursoandroid.modelo;
 public class Noticia {
 
     public String titulo;
+    public String imgUrl;
     public String urlNoticia;
 
     public Noticia() {
     }
 
-    public Noticia(String titulo, String urlNoticia) {
+    public Noticia(String imgUrl, String titulo, String urlNoticia) {
+        this.imgUrl = imgUrl;
         this.titulo = titulo;
         this.urlNoticia = urlNoticia;
     }

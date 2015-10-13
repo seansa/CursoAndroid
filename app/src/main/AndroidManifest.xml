@@ -3,7 +3,7 @@
     package="com.hssait.cursoandroid" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.activeandroid.app.Application"
@@ -52,6 +52,8 @@
             android:label="@string/title_activity_edit_item" >
         </activity>
         <activity android:name=".NoticiasActivity" >
+        </activity>
+        <activity android:name=".SimpleNoticiaActivity" >
         </activity>
     </application>
 
